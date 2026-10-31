@@ -41,7 +41,7 @@
     
     .wrapper {
       width: 100%;
-      max-width: 520px;
+      max-width: 500px;
       background: #0f172a;
       border-radius: 22px;
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -271,7 +271,7 @@
       display: block;
     }
 
-    /* 입력 필드 (iOS 확대 방지 16px 대응) */
+    /* 입력 필드 (iOS 자동 줌 방지 font-size 16px) */
     .form-group {
       margin-bottom: 16px;
     }
@@ -295,7 +295,7 @@
       padding: 13px 14px;
       border: 1.5px solid var(--card-border);
       border-radius: 11px;
-      font-size: 16px; /* iOS 자동 줌 방지 */
+      font-size: 16px; /* iOS Safari 줌 방지 */
       color: #ffffff;
       background-color: #0b1120;
       outline: none;
@@ -358,7 +358,7 @@
   <div class="hero">
     <div class="hero-tag">B 다이렉트샵 공식 제휴 접수처</div>
     <h1>SK브로드밴드<br><span>바로가입 24시 접수센터</span></h1>
-    <p>전화 영업 스트레스 없이 원하는 요금제를 셀프로 접수하세요.<br>전국 전담 기사 우선 배정 & 빠른 일정 조율</p>
+    <p>전화 영업 스트레스 없이 원하는 요금제를 셀프로 접수하세요.<br>전국 전담 기사 우선 배정 & 당일·희망일 빠른 설치 지원</p>
   </div>
 
   <div class="trust-bar">
@@ -462,7 +462,7 @@
 
     <div class="form-group">
       <label for="memo">설치 희망 주소 및 일정 (선택)</label>
-      <textarea id="memo" name="희망일_상세주소" rows="2" placeholder="예: 서울시 강남구 OO아파트, 토요일 오후 설치 희망"></textarea>
+      <textarea id="memo" name="희망일_상세주소" rows="2" placeholder="예: 서울시 강남구 OO아파트, 이번 주 토요일 오후 설치 희망"></textarea>
     </div>
 
     <button type="submit" class="submit-btn">⚡ 비대면 바로가입 신청 접수하기</button>
