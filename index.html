@@ -3,653 +3,204 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SK브로드밴드 B 다이렉트 바로가입 센터 | 고양시 공식 전담</title>
+  <title>고양시 SK브로드밴드 B 다이렉트 바로가입 센터</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
   <style>
     :root {
-      --sk-red: #e60012;
-      --sk-red-dark: #c5000f;
-      --sk-red-light: #fff1f0;
-      --sk-orange: #ff5000;
-      --navy-900: #0b0f19;
-      --navy-800: #111827;
-      --navy-700: #1e293b;
-      --slate-500: #64748b;
-      --slate-100: #f1f5f9;
-      --bg: #f8fafc;
-      --card-bg: #ffffff;
-      --border: #e2e8f0;
-      --radius: 16px;
+      --sk-red: #ea002c;
+      --sk-red-light: #ff2a54;
+      --sk-gradient: linear-gradient(135deg, #ea002c 0%, #ff4b4b 100%);
+      --bg-dark: #0b0f19;
+      --card-bg: #131b2e;
+      --card-border: #1f293d;
+      --card-active: #ea002c;
+      --text-white: #ffffff;
+      --text-gray: #94a3b8;
+      --text-muted: #64748b;
     }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; }
+    body { background-color: var(--bg-dark); color: var(--text-white); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 32px 16px; }
+    
+    .wrapper { max-width: 540px; width: 100%; background: #0f172a; border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); overflow: hidden; }
+    
+    /* 상단 B다이렉트샵 헤더 */
+    .hero { background: radial-gradient(circle at top right, rgba(234, 0, 44, 0.25), transparent 60%), #0b0f19; padding: 36px 28px 28px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.06); }
+    .hero-tag { display: inline-flex; align-items: center; gap: 6px; background: rgba(234, 0, 44, 0.15); border: 1px solid rgba(234, 0, 44, 0.4); color: #ff6b81; padding: 6px 14px; border-radius: 9999px; font-size: 12px; font-weight: 700; margin-bottom: 14px; letter-spacing: -0.2px; }
+    .hero h1 { font-size: 24px; font-weight: 800; line-height: 1.35; margin-bottom: 10px; letter-spacing: -0.5px; }
+    .hero h1 span { color: #ff334b; }
+    .hero p { font-size: 13.5px; color: var(--text-gray); line-height: 1.5; }
+    
+    /* 신뢰 포인트 바 */
+    .trust-bar { display: grid; grid-template-columns: repeat(3, 1fr); background: #090d16; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 12px 16px; text-align: center; }
+    .trust-item { font-size: 11.5px; color: #cbd5e1; font-weight: 600; }
+    .trust-item span { color: #ff4d6d; display: block; font-size: 10px; margin-bottom: 2px; }
+    
+    form { padding: 28px 24px; }
+    .section-title { font-size: 14px; font-weight: 700; color: #e2e8f0; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; }
+    .section-title .step { font-size: 11px; background: #1e293b; color: #94a3b8; padding: 2px 8px; border-radius: 6px; }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; }
-    body { background-color: var(--bg); color: #0f172a; line-height: 1.5; padding-bottom: 60px; -webkit-font-smoothing: antialiased; }
+    /* 상품 선택 카드 */
+    .plan-grid { display: grid; gap: 10px; margin-bottom: 24px; }
+    .plan-card { position: relative; border: 1.5px solid var(--card-border); background: var(--card-bg); border-radius: 14px; padding: 14px 16px; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; justify-content: space-between; }
+    .plan-card input { display: none; }
+    .plan-card:hover { border-color: rgba(234, 0, 44, 0.4); background: #162035; }
+    .plan-card:has(input:checked) { border-color: var(--sk-red); background: rgba(234, 0, 44, 0.08); box-shadow: 0 0 0 1px var(--sk-red); }
+    .plan-info { display: flex; flex-direction: column; gap: 3px; }
+    .plan-title { font-size: 14.5px; font-weight: 700; color: #f1f5f9; display: flex; align-items: center; gap: 8px; }
+    .plan-desc { font-size: 12px; color: var(--text-gray); }
+    .plan-badge { font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 4px; background: rgba(234, 0, 44, 0.2); color: #ff6b81; }
+    .plan-badge.best { background: var(--sk-red); color: #fff; }
+    .check-icon { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid #475569; display: flex; align-items: center; justify-content: center; font-size: 11px; color: transparent; }
+    .plan-card:has(input:checked) .check-icon { border-color: var(--sk-red); background: var(--sk-red); color: #fff; }
 
-    /* Top Brand Nav */
-    .top-nav {
-      background: var(--navy-900);
-      color: #fff;
-      padding: 12px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-    .brand-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 800;
-      font-size: 16px;
-      letter-spacing: -0.3px;
-    }
-    .brand-badge {
-      background: var(--sk-red);
-      color: #fff;
-      font-size: 11px;
-      padding: 3px 8px;
-      border-radius: 4px;
-      font-weight: 700;
-    }
-    .nav-tag { font-size: 12px; color: #94a3b8; }
+    /* 혜택 선택 */
+    .benefit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
+    .benefit-card { border: 1.5px solid var(--card-border); background: var(--card-bg); border-radius: 12px; padding: 12px 14px; text-align: center; cursor: pointer; transition: all 0.2s; }
+    .benefit-card input { display: none; }
+    .benefit-card:has(input:checked) { border-color: var(--sk-red); background: rgba(234, 0, 44, 0.08); }
+    .benefit-card .name { font-size: 13px; font-weight: 700; color: #f1f5f9; margin-bottom: 4px; display: block; }
+    .benefit-card .sub { font-size: 11.5px; color: #ff6b81; display: block; }
 
-    /* Hero Section */
-    .hero {
-      background: linear-gradient(180deg, var(--navy-900) 0%, var(--navy-800) 60%, var(--navy-700) 100%);
-      color: #ffffff;
-      padding: 44px 20px 40px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
+    /* 입력 필드 */
+    .form-group { margin-bottom: 18px; }
+    label { display: block; font-size: 13px; font-weight: 600; color: #cbd5e1; margin-bottom: 8px; }
+    label span { color: var(--sk-red); }
+    input[type="text"], input[type="tel"], textarea {
+      width: 100%; padding: 13px 16px; border: 1.5px solid var(--card-border); border-radius: 12px; font-size: 14px; color: #ffffff; background-color: #0b1120; outline: none; transition: all 0.2s;
     }
-    .hero::after {
-      content: '';
-      position: absolute;
-      top: -50px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 400px;
-      height: 250px;
-      background: radial-gradient(circle, rgba(230,0,18,0.25) 0%, rgba(0,0,0,0) 70%);
-      pointer-events: none;
-    }
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.15);
-      backdrop-filter: blur(8px);
-      padding: 6px 14px;
-      border-radius: 9999px;
-      font-size: 12.5px;
-      font-weight: 600;
-      color: #fef08a;
-      margin-bottom: 14px;
-    }
-    .hero h1 {
-      font-size: 26px;
-      font-weight: 900;
-      line-height: 1.35;
-      margin-bottom: 12px;
-      letter-spacing: -0.5px;
-    }
-    .hero h1 span {
-      background: linear-gradient(90deg, #ff4d4f, #ff7a45);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .hero p {
-      font-size: 14px;
-      color: #cbd5e1;
-      max-width: 460px;
-      margin: 0 auto 20px;
-      line-height: 1.5;
-    }
-    .hero-trust-bar {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 16px;
-    }
-    .trust-chip {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      padding: 6px 12px;
-      border-radius: 8px;
-      font-size: 12px;
-      color: #e2e8f0;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
+    input:focus, textarea:focus { border-color: var(--sk-red); box-shadow: 0 0 0 3px rgba(234, 0, 44, 0.15); }
 
-    /* Main Container */
-    .container {
-      max-width: 620px;
-      margin: -24px auto 0;
-      padding: 0 16px;
-      position: relative;
-      z-index: 10;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-      border: 1px solid rgba(0,0,0,0.05);
-      padding: 28px 22px;
-      margin-bottom: 22px;
-    }
-
-    .section-title {
-      font-size: 17px;
-      font-weight: 800;
-      color: #0f172a;
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .section-title .step-num {
-      background: var(--sk-red);
-      color: #fff;
-      font-size: 12px;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-    }
-    .section-subtitle {
-      font-size: 13px;
-      color: var(--slate-500);
-      margin-bottom: 18px;
-      margin-left: 30px;
-    }
-
-    /* Product Cards */
-    .product-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-    .product-card {
-      border: 2px solid var(--border);
-      border-radius: 14px;
-      padding: 16px;
-      cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-      background: #fafafa;
-    }
-    .product-card:hover {
-      border-color: #cbd5e1;
-      transform: translateY(-2px);
-    }
-    .product-card.selected {
-      border-color: var(--sk-red);
-      background: #fff;
-      box-shadow: 0 8px 24px rgba(230,0,18,0.12);
-    }
-    .product-card input[type="radio"] { display: none; }
-
-    .card-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 8px;
-    }
-    .tag-badge {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 700;
-      padding: 3px 8px;
-      border-radius: 6px;
-    }
-    .tag-badge.best { background: #fee2e2; color: #dc2626; }
-    .tag-badge.save { background: #dbeafe; color: #1d4ed8; }
-    .tag-badge.speed { background: #fef3c7; color: #b45309; }
-    .tag-badge.solo { background: #f3e8ff; color: #7e22ce; }
-
-    .check-icon {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      border: 2px solid #cbd5e1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      color: transparent;
-      transition: all 0.2s;
-    }
-    .product-card.selected .check-icon {
-      border-color: var(--sk-red);
-      background: var(--sk-red);
-      color: #fff;
-    }
-
-    .prod-title {
-      font-size: 15.5px;
-      font-weight: 800;
-      color: #1e293b;
-      margin-bottom: 4px;
-    }
-    .prod-desc {
-      font-size: 12px;
-      color: var(--slate-500);
-      margin-bottom: 12px;
-      line-height: 1.4;
-    }
-
-    .price-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      border-top: 1px dashed var(--border);
-      padding-top: 10px;
-    }
-    .original-price {
-      font-size: 12px;
-      color: #94a3b8;
-      text-decoration: line-through;
-    }
-    .discount-badge {
-      font-size: 11.5px;
-      font-weight: 700;
-      color: var(--sk-red);
-      background: var(--sk-red-light);
-      padding: 2px 7px;
-      border-radius: 4px;
-      margin-left: 4px;
-    }
-    .final-price {
-      text-align: right;
-    }
-    .final-price .amt {
-      font-size: 19px;
-      font-weight: 900;
-      color: var(--sk-red);
-      letter-spacing: -0.5px;
-    }
-    .final-price .unit {
-      font-size: 13px;
-      font-weight: 600;
-      color: #475569;
-    }
-
-    /* Benefit Grid */
-    .benefit-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-    .benefit-box {
-      border: 2px solid var(--border);
-      border-radius: 12px;
-      padding: 14px 12px;
-      cursor: pointer;
-      text-align: center;
-      background: #fafafa;
-      transition: all 0.2s;
-    }
-    .benefit-box:hover { border-color: #cbd5e1; }
-    .benefit-box.selected {
-      border-color: var(--sk-red);
-      background: #fff;
-      box-shadow: 0 4px 14px rgba(230,0,18,0.1);
-    }
-    .benefit-box input[type="radio"] { display: none; }
-    .benefit-box .b-tag {
-      font-size: 10.5px;
-      font-weight: 800;
-      color: var(--sk-red);
-      display: block;
-      margin-bottom: 4px;
-    }
-    .benefit-box .b-title {
-      font-size: 14px;
-      font-weight: 800;
-      color: #1e293b;
-      display: block;
-      margin-bottom: 4px;
-    }
-    .benefit-box .b-desc {
-      font-size: 11px;
-      color: var(--slate-500);
-      line-height: 1.35;
-    }
-
-    /* Form Fields */
-    .form-group {
-      margin-bottom: 18px;
-    }
-    label {
-      display: block;
-      font-size: 13.5px;
-      font-weight: 700;
-      color: #334155;
-      margin-bottom: 6px;
-    }
-    label .req { color: var(--sk-red); margin-left: 2px; }
-    input[type="text"], input[type="tel"], select, textarea {
-      width: 100%;
-      padding: 13px 14px;
-      border: 1.5px solid var(--border);
-      border-radius: 10px;
-      font-size: 14.5px;
-      color: #0f172a;
-      background-color: #fff;
-      outline: none;
-      transition: all 0.2s;
-    }
-    input:focus, select:focus, textarea:focus {
-      border-color: var(--sk-red);
-      box-shadow: 0 0 0 3px rgba(230, 0, 18, 0.12);
-    }
-
-    .notice-box {
-      background: #fff5f5;
-      border: 1px solid #fed7d7;
-      border-radius: 10px;
-      padding: 12px 14px;
-      margin-bottom: 22px;
-      font-size: 12.5px;
-      color: #991b1b;
-      line-height: 1.45;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    /* Submit CTA Button */
+    /* 버튼 */
     .submit-btn {
-      width: 100%;
-      background: linear-gradient(135deg, #e60012 0%, #ff4b4b 100%);
-      color: #ffffff;
-      border: none;
-      padding: 18px;
-      font-size: 16.5px;
-      font-weight: 800;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.2s;
-      box-shadow: 0 8px 24px rgba(230, 0, 18, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 10px;
+      width: 100%; background: var(--sk-gradient); color: #ffffff; border: none; padding: 17px; font-size: 16px; font-weight: 800;
+      border-radius: 14px; cursor: pointer; transition: all 0.2s; box-shadow: 0 8px 24px rgba(234, 0, 44, 0.35); margin-top: 10px; letter-spacing: -0.3px;
     }
-    .submit-btn:hover {
-      background: linear-gradient(135deg, #c5000f 0%, #e60012 100%);
-      transform: translateY(-2px);
-      box-shadow: 0 12px 28px rgba(230, 0, 18, 0.35);
-    }
-
-    /* Reviews Section */
-    .review-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .review-card {
-      background: #f8fafc;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 12px 14px;
-      font-size: 12.5px;
-    }
-    .review-header {
-      display: flex;
-      justify-content: space-between;
-      color: #64748b;
-      font-size: 11.5px;
-      margin-bottom: 4px;
-    }
-    .review-header .stars { color: #f59e0b; }
-    .review-text { color: #334155; line-height: 1.4; font-weight: 500; }
-
-    /* Footer */
-    .footer {
-      text-align: center;
-      font-size: 11.5px;
-      color: #94a3b8;
-      margin-top: 30px;
-      line-height: 1.6;
-    }
+    .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 28px rgba(234, 0, 44, 0.45); }
+    .footer-desc { text-align: center; font-size: 11.5px; color: var(--text-muted); margin-top: 18px; line-height: 1.5; }
   </style>
 </head>
 <body>
 
-  <!-- Top Nav -->
-  <header class="top-nav">
-    <div class="brand-logo">
-      <span class="brand-badge">B 다이렉트</span>
-      <span>SK broadband</span>
-    </div>
-    <div class="nav-tag">고양시 공식 전담센터</div>
-  </header>
+<div class="wrapper">
+  <!-- 헤더 -->
+  <div class="hero">
+    <div class="hero-tag">B 다이렉트샵 공식 제휴 접수처</div>
+    <h1>고양시 SK브로드밴드<br><span>바로가입 24시 접수센터</span></h1>
+    <p>전화 영업 스트레스 없이 원하는 요금제를 셀프로 접수하세요.<br>일산 · 덕양 전 지역 전담 기사 우선 배정 & 당일 설치 지원</p>
+  </div>
 
-  <!-- Hero Header -->
-  <section class="hero">
-    <div class="hero-badge">⚡ 24시 온라인 셀프 접수 전용</div>
-    <h1>고양시 SK브로드밴드<br><span>B 다이렉트 바로가입</span></h1>
-    <p>전화 영업 없이 내가 원하는 요금제를 직접 선택하고,<br>매월 최대 11,000원 추가 할인 혜택을 즉시 챙겨가세요!</p>
+  <div class="trust-bar">
+    <div class="trust-item"><span>혜택 01</span>더슬림 요금할인</div>
+    <div class="trust-item"><span>혜택 02</span>SKT 결합할인</div>
+    <div class="trust-item"><span>혜택 03</span>고양시 당일설치</div>
+  </div>
 
-    <div class="hero-trust-bar">
-      <div class="trust-chip">🛡️ SK브로드밴드 공식 인증</div>
-      <div class="trust-chip">📍 일산·덕양 전 지역 당일/주말 설치</div>
-      <div class="trust-chip">💰 더슬림 요금할인 공식 연동</div>
-    </div>
-  </section>
+  <!-- FormSubmit 연동: cfciss@gmail.com 자동 발송 -->
+  <form action="https://formsubmit.co/cfciss@gmail.com" method="POST">
+    <input type="hidden" name="_subject" value="[고양시 SKB 바로가입] 신규 접수">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
 
-  <!-- Form Container -->
-  <main class="container">
-    <div class="card">
-      <form action="https://formsubmit.co/cfciss@gmail.com" method="POST" id="joinForm">
-        <input type="hidden" name="_subject" value="[고양시 SKB 바로가입] 신규 접수 내역">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="선택상품" id="hiddenProduct" value="기가라이트(500M) + B tv All (월 34,100원)">
-        <input type="hidden" name="혜택유형" id="hiddenBenefit" value="더슬림 요금할인 (매월 최대 11,000원 추가할인)">
-
-        <div class="notice-box">
-          <span>⚡ 접수 시 <strong>고양시 전담 설치 기사님 일정 확인 후 카카오톡/문자</strong>로 즉시 일정 안내가 발송됩니다.</span>
-        </div>
-
-        <!-- STEP 1: 상품 선택 -->
-        <div class="section-title">
-          <span class="step-num">1</span>
-          <span>원하시는 바로가입 상품을 선택해 주세요</span>
-        </div>
-        <div class="section-subtitle">고양시 고객들이 가장 많이 선택하는 베스트셀러 조합입니다.</div>
-
-        <div class="product-grid">
-          <!-- Item 1: 500M + B tv (Best) -->
-          <div class="product-card selected" onclick="selectProduct(this, '기가라이트(500M) + B tv All (월 34,100원)')">
-            <div class="card-top">
-              <span class="tag-badge best">고양시 신청 1위 ★ 가족 결합 베스트</span>
-              <div class="check-icon">✓</div>
-            </div>
-            <div class="prod-title">기가라이트(500M) + B tv All (257개 채널)</div>
-            <div class="prod-desc">Smart3 셋톱박스 + 기가 Wi-Fi 공유기 무상 기본 지원 | 고화질 OTT & 대용량 다운로드 완벽 지원</div>
-            <div class="price-row">
-              <div>
-                <span class="original-price">월 45,100원</span>
-                <span class="discount-badge">더슬림할인 적용 시</span>
-              </div>
-              <div class="final-price">
-                <span class="amt">월 34,100</span><span class="unit">원</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Item 2: 100M + B tv -->
-          <div class="product-card" onclick="selectProduct(this, '광랜(100M) + B tv 스탠다드 (월 28,600원)')">
-            <div class="card-top">
-              <span class="tag-badge save">1~2인 가구 추천 | 가성비 알뜰형</span>
-              <div class="check-icon">✓</div>
-            </div>
-            <div class="prod-title">광랜(100M) + B tv 스탠다드 (223개 채널)</div>
-            <div class="prod-desc">유튜브, 넷플릭스 기본 시청 및 웹서핑에 최적화된 실속 알뜰 조합</div>
-            <div class="price-row">
-              <div>
-                <span class="original-price">월 38,500원</span>
-                <span class="discount-badge">온라인 단독가</span>
-              </div>
-              <div class="final-price">
-                <span class="amt">월 28,600</span><span class="unit">원</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Item 3: 1G + B tv -->
-          <div class="product-card" onclick="selectProduct(this, '기가인터넷(1G) + B tv All (월 39,600원)')">
-            <div class="card-top">
-              <span class="tag-badge speed">초고속 프리미엄 | 고사양 게임·방송용</span>
-              <div class="check-icon">✓</div>
-            </div>
-            <div class="prod-title">기가인터넷(1G) + B tv All (257개 채널)</div>
-            <div class="prod-desc">대용량 파일 전송, FPS 온라인 게임 핑 최적화, 다인 가족 동시 접속</div>
-            <div class="price-row">
-              <div>
-                <span class="original-price">월 50,600원</span>
-                <span class="discount-badge">더슬림할인 적용 시</span>
-              </div>
-              <div class="final-price">
-                <span class="amt">월 39,600</span><span class="unit">원</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Item 4: 인터넷 단독 -->
-          <div class="product-card" onclick="selectProduct(this, '인터넷 단독 (100M/500M/1G 중 선택, 월 1~2만원대)')">
-            <div class="card-top">
-              <span class="tag-badge solo">TV 미시청 | 원룸·오피스텔 인터넷 단독</span>
-              <div class="check-icon">✓</div>
-            </div>
-            <div class="prod-title">인터넷 단독 (100M / 500M / 1G)</div>
-            <div class="prod-desc">TV 없이 인터넷과 Wi-Fi만 실속 있게 이용하고자 하는 고객 추천</div>
-            <div class="price-row">
-              <div>
-                <span class="discount-badge">온라인 단독 바로할인</span>
-              </div>
-              <div class="final-price">
-                <span class="amt">월 17,600</span><span class="unit">원부터~</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- STEP 2: 혜택 선택 -->
-        <div class="section-title">
-          <span class="step-num">2</span>
-          <span>원하시는 혜택 방식을 선택해 주세요</span>
-        </div>
-        <div class="section-subtitle">일회성 사은품보다 3년 내내 요금할인을 받는 '더슬림' 선택률이 90% 이상입니다.</div>
-
-        <div class="benefit-grid">
-          <div class="benefit-box selected" onclick="selectBenefit(this, '더슬림 요금할인 (매월 최대 11,000원 추가할인)')">
-            <span class="b-tag">추천 94% 선택</span>
-            <span class="b-title">더슬림 요금할인</span>
-            <span class="b-desc">3년 내내 매월 최대 11,000원씩<br>총 396,000원 통신비 차감</span>
-          </div>
-
-          <div class="benefit-box" onclick="selectBenefit(this, '신규 사은품 지원 (상품권 및 사은 혜택)')">
-            <span class="b-tag">선물형 혜택</span>
-            <span class="b-title">신규 사은품 지원</span>
-            <span class="b-desc">백화점 모바일 상품권 등<br>개통 즉시 선물형 지급</span>
-          </div>
-        </div>
-
-        <!-- STEP 3: 신청 정보 입력 -->
-        <div class="section-title">
-          <span class="step-num">3</span>
-          <span>설치 및 안내받으실 정보를 입력해 주세요</span>
-        </div>
-        <div class="section-subtitle">작성해 주신 정보는 고양시 기사님 설치 일정 조율 용도로만 안전하게 사용됩니다.</div>
-
-        <div class="form-group">
-          <label for="name">신청자 성함<span class="req">*</span></label>
-          <input type="text" id="name" name="신청자명" placeholder="예: 홍길동" required>
-        </div>
-
-        <div class="form-group">
-          <label for="phone">연락처 (휴대폰 번호)<span class="req">*</span></label>
-          <input type="tel" id="phone" name="연락처" placeholder="예: 010-1234-5678" required>
-        </div>
-
-        <div class="form-group">
-          <label for="region">설치 희망 지역 (고양시 관할)<span class="req">*</span></label>
-          <select id="region" name="설치지역" required>
-            <option value="">설치 지역을 선택해 주세요</option>
-            <option value="덕양구 신도시 (삼송·원흥·지축·향동·덕은지구)">고양시 덕양구 신도시 (삼송·원흥·지축·향동·덕은지구 등)</option>
-            <option value="덕양구 일반 (화정·행신·토당·원당·고양동)">고양시 덕양구 일반 (화정·행신·토당·원당·고양동 등)</option>
-            <option value="일산동구 (백석·마두·장항·풍동·식사동)">고양시 일산동구 (백석·마두·장항·풍동·식사동 등)</option>
-            <option value="일산서구 (킨텍스·주엽·대화·탄현·일산동)">고양시 일산서구 (킨텍스·주엽·대화·탄현·일산동 등)</option>
-            <option value="기타 인근 지역">기타 인근 지역</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="memo">상세 주소 및 희망 설치일 (선택)</label>
-          <textarea id="memo" name="상세주소_희망설치일" rows="3" placeholder="예: 삼송 OO아파트 O동, 이번 주 토요일 오전 설치를 희망합니다."></textarea>
-        </div>
-
-        <button type="submit" class="submit-btn">
-          <span>⚡ 간편 가입신청 완료하기</span>
-        </button>
-      </form>
+    <!-- 1단계: 상품 선택 -->
+    <div class="section-title">
+      <span>1. 가입 희망 상품 선택</span>
+      <span class="step">온라인 단독</span>
     </div>
 
-    <!-- Social Proof Reviews -->
-    <div class="card">
-      <div class="section-title">
-        <span>💬 고양시 실제 개통 고객 리얼 후기</span>
-      </div>
-      <div class="review-grid">
-        <div class="review-card">
-          <div class="review-header">
-            <span>고양시 덕양구 삼송동 (김*훈 고객님)</span>
-            <span class="stars">★★★★★</span>
+    <div class="plan-grid">
+      <label class="plan-card">
+        <input type="radio" name="가입상품" value="500M 기가라이트 + B tv All (추천 1위)" checked>
+        <div class="plan-info">
+          <div class="plan-title">
+            500M 기가라이트 + B tv All
+            <span class="plan-badge best">인기 1위</span>
           </div>
-          <div class="review-text">"전화 영업 스트레스 없이 온라인으로 원하는 500M 요금제 신청하니까 다음날 오전에 기사님이 딱 오셔서 깔끔하게 설치해 주셨습니다. 더슬림 할인으로 매달 통신비 아끼니 대만족입니다."</div>
+          <div class="plan-desc">초고화질 스트리밍 + 250여 개 채널 베스트셀러</div>
         </div>
-        <div class="review-card">
-          <div class="review-header">
-            <span>고양시 일산동구 백석동 (이*영 고객님)</span>
-            <span class="stars">★★★★★</span>
+        <div class="check-icon">✓</div>
+      </label>
+
+      <label class="plan-card">
+        <input type="radio" name="가입상품" value="100M 광랜 + B tv (실속형)">
+        <div class="plan-info">
+          <div class="plan-title">
+            100M 광랜 + B tv
+            <span class="plan-badge">실속형</span>
           </div>
-          <div class="review-text">"복잡한 사은품 말장난 없이 3년 내내 매달 11,000원씩 바로 할인되는 방식이라 훨씬 투명하고 믿음이 가네요. 스마트3 셋톱박스도 화질 선명하고 속도 빠릅니다."</div>
+          <div class="plan-desc">1~2인 가구, 웹서핑 & 유튜브 중심 알뜰 결합</div>
         </div>
-      </div>
+        <div class="check-icon">✓</div>
+      </label>
+
+      <label class="plan-card">
+        <input type="radio" name="가입상품" value="1G 기가인터넷 + B tv (프리미엄)">
+        <div class="plan-info">
+          <div class="plan-title">
+            1G 기가인터넷 + B tv
+            <span class="plan-badge">초고속</span>
+          </div>
+          <div class="plan-desc">대용량 다운로드 및 고사양 게이밍 최적화</div>
+        </div>
+        <div class="check-icon">✓</div>
+      </label>
+
+      <label class="plan-card">
+        <input type="radio" name="가입상품" value="인터넷 단독 (100M/500M/1G)">
+        <div class="plan-info">
+          <div class="plan-title">인터넷 단독 상품</div>
+          <div class="plan-desc">TV 없이 인터넷만 필요한 고객 전용</div>
+        </div>
+        <div class="check-icon">✓</div>
+      </label>
     </div>
 
-    <!-- Footer Note -->
-    <footer class="footer">
-      <p>SK브로드밴드 공식 인증 B 다이렉트 바로가입 고양시 전담센터</p>
-      <p>본 페이지는 고객 편의를 위한 24시 온라인 간편 접수 페이지이며, 입력된 개인정보는 설치 일정 확인 및 접수 확인 외에 다른 용도로 사용되지 않습니다.</p>
-    </footer>
-  </main>
+    <!-- 2단계: 혜택 선택 -->
+    <div class="section-title">
+      <span>2. 혜택 방식 선택</span>
+      <span class="step">택 1</span>
+    </div>
+    <div class="benefit-grid">
+      <label class="benefit-card">
+        <input type="radio" name="혜택방식" value="더슬림 요금할인 (매월 최대 11,000원 추가할인)" checked>
+        <span class="name">더슬림 요금할인</span>
+        <span class="sub">매월 최대 11,000원 감면</span>
+      </label>
+      <label class="benefit-card">
+        <input type="radio" name="혜택방식" value="신규 사은품 지원 (상품권/선물형)">
+        <span class="name">신규 사은품 지원</span>
+        <span class="sub">상품권 등 일시 지급형</span>
+      </label>
+    </div>
 
-  <script>
-    function selectProduct(el, prodName) {
-      document.querySelectorAll('.product-card').forEach(c => c.classList.remove('selected'));
-      el.classList.add('selected');
-      document.getElementById('hiddenProduct').value = prodName;
-    }
+    <!-- 3단계: 신청자 정보 입력 (지역 선택 메뉴 제외됨) -->
+    <div class="section-title">
+      <span>3. 신청자 정보 입력</span>
+      <span class="step">필수</span>
+    </div>
 
-    function selectBenefit(el, benefitName) {
-      document.querySelectorAll('.benefit-box').forEach(b => b.classList.remove('selected'));
-      el.classList.add('selected');
-      document.getElementById('hiddenBenefit').value = benefitName;
-    }
-  </script>
+    <div class="form-group">
+      <label for="name">신청자 성함 <span>*</span></label>
+      <input type="text" id="name" name="신청자명" placeholder="예: 홍길동" required>
+    </div>
+
+    <div class="form-group">
+      <label for="phone">연락처 <span>*</span></label>
+      <input type="tel" id="phone" name="연락처" placeholder="예: 010-1234-5678" required>
+    </div>
+
+    <div class="form-group">
+      <label for="memo">설치 희망 주소 및 일정 (선택)</label>
+      <textarea id="memo" name="희망일_상세주소" rows="2" placeholder="예: 삼송 OO아파트 O동, 토요일 오후 설치 희망"></textarea>
+    </div>
+
+    <button type="submit" class="submit-btn">⚡ 비대면 바로가입 신청 접수하기</button>
+
+    <div class="footer-desc">
+      접수 즉시 설치 가능 일정 확인 후 안내 문자/카톡이 발송됩니다.<br>
+      수집된 정보는 가입 안내 및 설치 일정 조율 목적으로만 안전하게 사용됩니다.
+    </div>
+  </form>
+</div>
+
 </body>
 </html>
