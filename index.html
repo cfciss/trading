@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>고양시 SK브로드밴드 B 다이렉트 바로가입 센터</title>
+  <style>
+    :root {
+      --primary: #e60012;
+      --primary-dark: #c5000f;
+      --bg: #f5f7fb;
+      --card-bg: #ffffff;
+      --text: #1f2937;
+      --border: #e5e7eb;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; }
+    body { background-color: var(--bg); color: var(--text); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 24px 16px; }
+    .container { background: var(--card-bg); max-width: 520px; width: 100%; border-radius: 20px; box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08); overflow: hidden; border: 1px solid rgba(0,0,0,0.04); }
+    .header { background: linear-gradient(135deg, #e60012 0%, #ff4b4b 100%); color: #ffffff; padding: 32px 24px 28px; text-align: center; }
+    .header .badge { display: inline-block; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(4px); padding: 5px 12px; border-radius: 9999px; font-size: 12px; font-weight: 600; margin-bottom: 10px; }
+    .header h1 { font-size: 23px; font-weight: 800; margin-bottom: 8px; line-height: 1.3; }
+    .header p { font-size: 13.5px; opacity: 0.92; line-height: 1.4; }
+    form { padding: 28px 24px; }
+    .notice-box { background-color: #fff5f5; border-left: 4px solid var(--primary); border-radius: 10px; padding: 12px 14px; margin-bottom: 22px; font-size: 13px; color: #9b2c2c; line-height: 1.45; }
+    .form-group { margin-bottom: 20px; }
+    label { display: block; font-size: 13.5px; font-weight: 700; color: #374151; margin-bottom: 8px; }
+    label .req { color: var(--primary); margin-left: 2px; }
+    input[type="text"], input[type="tel"], select, textarea {
+      width: 100%; padding: 13px 15px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 14.5px; color: #111827; background-color: #ffffff; outline: none; transition: all 0.2s;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(230, 0, 18, 0.12); }
+    .benefit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .benefit-card { border: 1.5px solid var(--border); border-radius: 10px; padding: 12px 10px; text-align: center; cursor: pointer; transition: all 0.2s; background: #fafafa; }
+    .benefit-card input { display: none; }
+    .benefit-card .title { font-size: 13px; font-weight: 700; color: #4b5563; display: block; margin-bottom: 3px; }
+    .benefit-card .desc { font-size: 11.5px; color: #9ca3af; display: block; }
+    .benefit-card:has(input:checked) { border-color: var(--primary); background: #fff5f5; }
+    .benefit-card:has(input:checked) .title { color: var(--primary); }
+    .benefit-card:has(input:checked) .desc { color: #e60012; opacity: 0.8; }
+    .submit-btn {
+      width: 100%; background: var(--primary); color: #ffffff; border: none; padding: 16px; font-size: 16px; font-weight: 700;
+      border-radius: 12px; cursor: pointer; transition: background 0.2s; box-shadow: 0 6px 18px rgba(230, 0, 18, 0.25); margin-top: 10px;
+    }
+    .submit-btn:hover { background: var(--primary-dark); }
+    .footer-note { text-align: center; margin-top: 18px; font-size: 12px; color: #9ca3af; line-height: 1.4; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div class="badge">고양시 공식 전담 개통 지원</div>
+    <h1>SK브로드밴드 바로가입</h1>
+    <p>전화 영업 없이 24시간 간편 접수 | 일산·덕양 빠른 설치</p>
+  </div>
+
+  <!-- FormSubmit 연동: cfciss@gmail.com 자동 발송 -->
+  <form action="https://formsubmit.co/cfciss@gmail.com" method="POST">
+    <input type="hidden" name="_subject" value="[고양시 SKB 바로가입] 신규 가입신청 접수">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+
+    <div class="notice-box">
+      ⚡ 접수 시 <strong>고양시 전담 기사님 설치 일정 확인 후 카톡/문자</strong>로 빠른 안내를 드립니다.
+    </div>
+
+    <div class="form-group">
+      <label for="name">신청자 성함<span class="req">*</span></label>
+      <input type="text" id="name" name="신청자명" placeholder="예: 홍길동" required>
+    </div>
+
+    <div class="form-group">
+      <label for="phone">연락처<span class="req">*</span></label>
+      <input type="tel" id="phone" name="연락처" placeholder="예: 010-1234-5678" required>
+    </div>
+
+    <div class="form-group">
+      <label for="region">설치 희망 지역 (고양시 관할)<span class="req">*</span></label>
+      <select id="region" name="설치지역" required>
+        <option value="">설치 지역을 선택해 주세요</option>
+        <option value="덕양구 (삼송/원흥/지축/향동/덕은)">덕양구 신도시 (삼송·원흥·지축·향동·덕은지구 등)</option>
+        <option value="덕양구 (화정/행신/토당/원당/고양동)">덕양구 일반 (화정·행신·토당·원당·고양동 등)</option>
+        <option value="일산동구 (백석/마두/장항/풍동/식사)">일산동구 (백석·마두·장항·풍동·식사동 등)</option>
+        <option value="일산서구 (킨텍스/주엽/대화/탄현/가좌)">일산서구 (킨텍스·주엽·대화·탄현·일산동 등)</option>
+        <option value="기타 인근 지역">기타 인근 지역</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="product">희망 가입 상품 (B 다이렉트 바로가입)<span class="req">*</span></label>
+      <select id="product" name="희망상품" required>
+        <option value="기가라이트(500M) + B tv (추천 1위)">[추천 1위] 500M 기가라이트 + B tv 결합 (가장 인기)</option>
+        <option value="광랜(100M) + B tv">[알뜰형] 100M 광랜 + B tv 결합 (1~2인가구)</option>
+        <option value="기가인터넷(1G) + B tv">[고화질/게임] 1G 기가 + B tv 결합</option>
+        <option value="기가라이트(500M) 단독">[인터넷 단독] 500M 기가라이트</option>
+        <option value="광랜(100M) 단독">[인터넷 단독] 100M 광랜</option>
+        <option value="기가인터넷(1G) 단독">[인터넷 단독] 1G 기가</option>
+        <option value="상담 후 최적 요금제 결정">설치 환경 확인 후 맞춤 추천 희망</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>원하시는 혜택 방식<span class="req">*</span></label>
+      <div class="benefit-grid">
+        <label class="benefit-card">
+          <input type="radio" name="혜택유형" value="더슬림 요금할인 (매월 최대 11,000원 추가할인)" checked>
+          <span class="title">더슬림 요금할인</span>
+          <span class="desc">매월 최대 11,000원 할인</span>
+        </label>
+        <label class="benefit-card">
+          <input type="radio" name="혜택유형" value="신규 사은품 지원 (상품권/현금성 혜택)">
+          <span class="title">신규 사은품 지원</span>
+          <span class="desc">상품권 등 선물형 혜택</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="memo">상세 주소 및 희망 설치일 (선택)</label>
+      <textarea id="memo" name="상세주소_희망설치일" rows="3" placeholder="예: 삼송 OO아파트 O동, 이번 주 토요일 오전 설치 희망합니다."></textarea>
+    </div>
+
+    <button type="submit" class="submit-btn">간편 가입 신청하기</button>
+  </form>
+
+  <div class="footer-note">
+    안심 접수: 입력하신 정보는 가입 안내 및 설치 확인 목적으로만 사용됩니다.
+  </div>
+</div>
+
+</body>
+</html>
