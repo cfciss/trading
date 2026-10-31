@@ -41,7 +41,7 @@
     
     .wrapper {
       width: 100%;
-      max-width: 500px;
+      max-width: 520px;
       background: #0f172a;
       border-radius: 22px;
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -271,7 +271,7 @@
       display: block;
     }
 
-    /* 입력 필드 (iOS 자동 줌 방지 font-size 16px) */
+    /* 입력 필드 */
     .form-group {
       margin-bottom: 16px;
     }
@@ -295,7 +295,7 @@
       padding: 13px 14px;
       border: 1.5px solid var(--card-border);
       border-radius: 11px;
-      font-size: 16px; /* iOS Safari 줌 방지 */
+      font-size: 16px; /* iOS 자동 줌 방지 */
       color: #ffffff;
       background-color: #0b1120;
       outline: none;
@@ -337,13 +337,13 @@
       line-height: 1.45;
     }
     
-    /* 360px 이하 초소형 스마트폰 대응 */
+    /* 360px 이하 스마트폰 대응 */
     @media (max-width: 360px) {
       body {
-        padding: 10px 8px;
+        padding: 12px 8px;
       }
       form {
-        padding: 18px 12px;
+        padding: 16px 12px;
       }
       .benefit-grid {
         grid-template-columns: 1fr;
@@ -462,7 +462,7 @@
 
     <div class="form-group">
       <label for="memo">설치 희망 주소 및 일정 (선택)</label>
-      <textarea id="memo" name="희망일_상세주소" rows="2" placeholder="예: 서울시 강남구 OO아파트, 이번 주 토요일 오후 설치 희망"></textarea>
+      <textarea id="memo" name="희망일_상세주소" rows="2" placeholder="예: 서울 강남구 OO아파트, 토요일 오후 설치 희망"></textarea>
     </div>
 
     <button type="submit" class="submit-btn">⚡ 비대면 바로가입 신청 접수하기</button>
