@@ -2,8 +2,8 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>고양시 SK브로드밴드 B 다이렉트 바로가입 센터</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>SK브로드밴드 B 다이렉트 바로가입 센터</title>
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
   <style>
     :root {
@@ -13,91 +13,363 @@
       --bg-dark: #0b0f19;
       --card-bg: #131b2e;
       --card-border: #1f293d;
-      --card-active: #ea002c;
+      --card-hover: #19233c;
       --text-white: #ffffff;
       --text-gray: #94a3b8;
       --text-muted: #64748b;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; }
-    body { background-color: var(--bg-dark); color: var(--text-white); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 32px 16px; }
     
-    .wrapper { max-width: 540px; width: 100%; background: #0f172a; border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); overflow: hidden; }
-    
-    /* 상단 B다이렉트샵 헤더 */
-    .hero { background: radial-gradient(circle at top right, rgba(234, 0, 44, 0.25), transparent 60%), #0b0f19; padding: 36px 28px 28px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.06); }
-    .hero-tag { display: inline-flex; align-items: center; gap: 6px; background: rgba(234, 0, 44, 0.15); border: 1px solid rgba(234, 0, 44, 0.4); color: #ff6b81; padding: 6px 14px; border-radius: 9999px; font-size: 12px; font-weight: 700; margin-bottom: 14px; letter-spacing: -0.2px; }
-    .hero h1 { font-size: 24px; font-weight: 800; line-height: 1.35; margin-bottom: 10px; letter-spacing: -0.5px; }
-    .hero h1 span { color: #ff334b; }
-    .hero p { font-size: 13.5px; color: var(--text-gray); line-height: 1.5; }
-    
-    /* 신뢰 포인트 바 */
-    .trust-bar { display: grid; grid-template-columns: repeat(3, 1fr); background: #090d16; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 12px 16px; text-align: center; }
-    .trust-item { font-size: 11.5px; color: #cbd5e1; font-weight: 600; }
-    .trust-item span { color: #ff4d6d; display: block; font-size: 10px; margin-bottom: 2px; }
-    
-    form { padding: 28px 24px; }
-    .section-title { font-size: 14px; font-weight: 700; color: #e2e8f0; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; }
-    .section-title .step { font-size: 11px; background: #1e293b; color: #94a3b8; padding: 2px 8px; border-radius: 6px; }
-
-    /* 상품 선택 카드 */
-    .plan-grid { display: grid; gap: 10px; margin-bottom: 24px; }
-    .plan-card { position: relative; border: 1.5px solid var(--card-border); background: var(--card-bg); border-radius: 14px; padding: 14px 16px; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; justify-content: space-between; }
-    .plan-card input { display: none; }
-    .plan-card:hover { border-color: rgba(234, 0, 44, 0.4); background: #162035; }
-    .plan-card:has(input:checked) { border-color: var(--sk-red); background: rgba(234, 0, 44, 0.08); box-shadow: 0 0 0 1px var(--sk-red); }
-    .plan-info { display: flex; flex-direction: column; gap: 3px; }
-    .plan-title { font-size: 14.5px; font-weight: 700; color: #f1f5f9; display: flex; align-items: center; gap: 8px; }
-    .plan-desc { font-size: 12px; color: var(--text-gray); }
-    .plan-badge { font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 4px; background: rgba(234, 0, 44, 0.2); color: #ff6b81; }
-    .plan-badge.best { background: var(--sk-red); color: #fff; }
-    .check-icon { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid #475569; display: flex; align-items: center; justify-content: center; font-size: 11px; color: transparent; }
-    .plan-card:has(input:checked) .check-icon { border-color: var(--sk-red); background: var(--sk-red); color: #fff; }
-
-    /* 혜택 선택 */
-    .benefit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
-    .benefit-card { border: 1.5px solid var(--card-border); background: var(--card-bg); border-radius: 12px; padding: 12px 14px; text-align: center; cursor: pointer; transition: all 0.2s; }
-    .benefit-card input { display: none; }
-    .benefit-card:has(input:checked) { border-color: var(--sk-red); background: rgba(234, 0, 44, 0.08); }
-    .benefit-card .name { font-size: 13px; font-weight: 700; color: #f1f5f9; margin-bottom: 4px; display: block; }
-    .benefit-card .sub { font-size: 11.5px; color: #ff6b81; display: block; }
-
-    /* 입력 필드 */
-    .form-group { margin-bottom: 18px; }
-    label { display: block; font-size: 13px; font-weight: 600; color: #cbd5e1; margin-bottom: 8px; }
-    label span { color: var(--sk-red); }
-    input[type="text"], input[type="tel"], textarea {
-      width: 100%; padding: 13px 16px; border: 1.5px solid var(--card-border); border-radius: 12px; font-size: 14px; color: #ffffff; background-color: #0b1120; outline: none; transition: all 0.2s;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      word-break: keep-all;
+      -webkit-tap-highlight-color: transparent;
     }
-    input:focus, textarea:focus { border-color: var(--sk-red); box-shadow: 0 0 0 3px rgba(234, 0, 44, 0.15); }
+    
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-white);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding: 20px 12px calc(24px + env(safe-area-inset-bottom));
+    }
+    
+    .wrapper {
+      width: 100%;
+      max-width: 520px;
+      background: #0f172a;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+    }
+    
+    /* 상단 공식 헤더 */
+    .hero {
+      background: radial-gradient(circle at top right, rgba(234, 0, 44, 0.22), transparent 60%), #0b0f19;
+      padding: 30px 20px 24px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(234, 0, 44, 0.15);
+      border: 1px solid rgba(234, 0, 44, 0.35);
+      color: #ff6b81;
+      padding: 5px 12px;
+      border-radius: 9999px;
+      font-size: clamp(11px, 2.8vw, 12px);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    
+    .hero h1 {
+      font-size: clamp(21px, 5.2vw, 24px);
+      font-weight: 800;
+      line-height: 1.35;
+      margin-bottom: 8px;
+      letter-spacing: -0.4px;
+    }
+    
+    .hero h1 span {
+      color: #ff334b;
+    }
+    
+    .hero p {
+      font-size: clamp(12.5px, 3.2vw, 13.5px);
+      color: var(--text-gray);
+      line-height: 1.5;
+    }
+    
+    /* 3대 혜택 바 */
+    .trust-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: #090d16;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 11px 8px;
+      text-align: center;
+      gap: 4px;
+    }
+    
+    .trust-item {
+      font-size: clamp(11px, 2.7vw, 12px);
+      color: #cbd5e1;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+    
+    .trust-item span {
+      color: #ff4d6d;
+      display: block;
+      font-size: 10px;
+      margin-bottom: 2px;
+    }
+    
+    form {
+      padding: 22px 18px 24px;
+    }
+    
+    .section-title {
+      font-size: clamp(13px, 3.5vw, 14px);
+      font-weight: 700;
+      color: #e2e8f0;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .section-title .step {
+      font-size: 11px;
+      background: #1e293b;
+      color: #94a3b8;
+      padding: 2px 7px;
+      border-radius: 5px;
+    }
 
-    /* 버튼 */
+    /* 요금제 선택 카드 */
+    .plan-grid {
+      display: grid;
+      gap: 9px;
+      margin-bottom: 22px;
+    }
+    
+    .plan-card {
+      position: relative;
+      border: 1.5px solid var(--card-border);
+      background: var(--card-bg);
+      border-radius: 13px;
+      padding: 13px 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    
+    .plan-card input {
+      display: none;
+    }
+    
+    .plan-card:hover {
+      background: var(--card-hover);
+    }
+    
+    .plan-card:has(input:checked) {
+      border-color: var(--sk-red);
+      background: rgba(234, 0, 44, 0.09);
+      box-shadow: 0 0 0 1px var(--sk-red);
+    }
+    
+    .plan-info {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      flex: 1;
+      min-width: 0;
+    }
+    
+    .plan-title {
+      font-size: clamp(13.5px, 3.6vw, 14.5px);
+      font-weight: 700;
+      color: #f1f5f9;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    
+    .plan-desc {
+      font-size: clamp(11.5px, 2.9vw, 12px);
+      color: var(--text-gray);
+      line-height: 1.4;
+    }
+    
+    .plan-badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(234, 0, 44, 0.2);
+      color: #ff6b81;
+      white-space: nowrap;
+    }
+    
+    .plan-badge.best {
+      background: var(--sk-red);
+      color: #fff;
+    }
+    
+    .check-icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      border: 1.5px solid #475569;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: transparent;
+      transition: all 0.2s;
+    }
+    
+    .plan-card:has(input:checked) .check-icon {
+      border-color: var(--sk-red);
+      background: var(--sk-red);
+      color: #fff;
+    }
+
+    /* 혜택 선택 그리드 */
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+    
+    .benefit-card {
+      border: 1.5px solid var(--card-border);
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 12px 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .benefit-card input {
+      display: none;
+    }
+    
+    .benefit-card:has(input:checked) {
+      border-color: var(--sk-red);
+      background: rgba(234, 0, 44, 0.09);
+    }
+    
+    .benefit-card .name {
+      font-size: clamp(12.5px, 3.2vw, 13px);
+      font-weight: 700;
+      color: #f1f5f9;
+      margin-bottom: 3px;
+      display: block;
+    }
+    
+    .benefit-card .sub {
+      font-size: clamp(11px, 2.8vw, 11.5px);
+      color: #ff6b81;
+      display: block;
+    }
+
+    /* 입력 필드 (iOS 확대 방지 16px 대응) */
+    .form-group {
+      margin-bottom: 16px;
+    }
+    
+    label {
+      display: block;
+      font-size: clamp(12.5px, 3.2vw, 13px);
+      font-weight: 600;
+      color: #cbd5e1;
+      margin-bottom: 7px;
+    }
+    
+    label span {
+      color: var(--sk-red);
+    }
+    
+    input[type="text"],
+    input[type="tel"],
+    textarea {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1.5px solid var(--card-border);
+      border-radius: 11px;
+      font-size: 16px; /* iOS 자동 줌 방지 */
+      color: #ffffff;
+      background-color: #0b1120;
+      outline: none;
+      transition: all 0.2s;
+    }
+    
+    input:focus,
+    textarea:focus {
+      border-color: var(--sk-red);
+      box-shadow: 0 0 0 3px rgba(234, 0, 44, 0.15);
+    }
+
+    /* 제출 버튼 */
     .submit-btn {
-      width: 100%; background: var(--sk-gradient); color: #ffffff; border: none; padding: 17px; font-size: 16px; font-weight: 800;
-      border-radius: 14px; cursor: pointer; transition: all 0.2s; box-shadow: 0 8px 24px rgba(234, 0, 44, 0.35); margin-top: 10px; letter-spacing: -0.3px;
+      width: 100%;
+      background: var(--sk-gradient);
+      color: #ffffff;
+      border: none;
+      padding: 16px;
+      font-size: clamp(15px, 4vw, 16px);
+      font-weight: 800;
+      border-radius: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 6px 20px rgba(234, 0, 44, 0.35);
+      margin-top: 8px;
+      letter-spacing: -0.3px;
     }
-    .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 28px rgba(234, 0, 44, 0.45); }
-    .footer-desc { text-align: center; font-size: 11.5px; color: var(--text-muted); margin-top: 18px; line-height: 1.5; }
+    
+    .submit-btn:active {
+      transform: scale(0.985);
+    }
+    
+    .footer-desc {
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 16px;
+      line-height: 1.45;
+    }
+    
+    /* 360px 이하 초소형 스마트폰 대응 */
+    @media (max-width: 360px) {
+      body {
+        padding: 10px 8px;
+      }
+      form {
+        padding: 18px 12px;
+      }
+      .benefit-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
 
 <div class="wrapper">
-  <!-- 헤더 -->
+  <!-- 공식 헤더 -->
   <div class="hero">
     <div class="hero-tag">B 다이렉트샵 공식 제휴 접수처</div>
-    <h1>고양시 SK브로드밴드<br><span>바로가입 24시 접수센터</span></h1>
-    <p>전화 영업 스트레스 없이 원하는 요금제를 셀프로 접수하세요.<br>일산 · 덕양 전 지역 전담 기사 우선 배정 & 당일 설치 지원</p>
+    <h1>SK브로드밴드<br><span>바로가입 24시 접수센터</span></h1>
+    <p>전화 영업 스트레스 없이 원하는 요금제를 셀프로 접수하세요.<br>전국 전담 기사 우선 배정 & 빠른 일정 조율</p>
   </div>
 
   <div class="trust-bar">
     <div class="trust-item"><span>혜택 01</span>더슬림 요금할인</div>
     <div class="trust-item"><span>혜택 02</span>SKT 결합할인</div>
-    <div class="trust-item"><span>혜택 03</span>고양시 당일설치</div>
+    <div class="trust-item"><span>혜택 03</span>전국 빠른 설치</div>
   </div>
 
   <!-- FormSubmit 연동: cfciss@gmail.com 자동 발송 -->
   <form action="https://formsubmit.co/cfciss@gmail.com" method="POST">
-    <input type="hidden" name="_subject" value="[고양시 SKB 바로가입] 신규 접수">
+    <input type="hidden" name="_subject" value="[SKB 바로가입] 신규 가입신청 접수">
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_template" value="table">
 
@@ -172,7 +444,7 @@
       </label>
     </div>
 
-    <!-- 3단계: 신청자 정보 입력 (지역 선택 메뉴 제외됨) -->
+    <!-- 3단계: 신청자 정보 입력 -->
     <div class="section-title">
       <span>3. 신청자 정보 입력</span>
       <span class="step">필수</span>
@@ -190,7 +462,7 @@
 
     <div class="form-group">
       <label for="memo">설치 희망 주소 및 일정 (선택)</label>
-      <textarea id="memo" name="희망일_상세주소" rows="2" placeholder="예: 삼송 OO아파트 O동, 토요일 오후 설치 희망"></textarea>
+      <textarea id="memo" name="희망일_상세주소" rows="2" placeholder="예: 서울시 강남구 OO아파트, 토요일 오후 설치 희망"></textarea>
     </div>
 
     <button type="submit" class="submit-btn">⚡ 비대면 바로가입 신청 접수하기</button>
