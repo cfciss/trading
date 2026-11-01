@@ -290,6 +290,7 @@
     
     input[type="text"],
     input[type="tel"],
+    select,
     textarea {
       width: 100%;
       padding: 13px 14px;
@@ -302,7 +303,17 @@
       transition: all 0.2s;
     }
     
+    select {
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      background-size: 16px;
+      cursor: pointer;
+    }
+
     input:focus,
+    select:focus,
     textarea:focus {
       border-color: var(--sk-red);
       box-shadow: 0 0 0 3px rgba(234, 0, 44, 0.15);
@@ -336,6 +347,37 @@
       margin-top: 16px;
       line-height: 1.45;
     }
+
+    /* 완료 메시지 화면용 스타일 */
+    .success-container {
+      display: none;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      background: rgba(234, 0, 44, 0.15);
+      border: 2px solid var(--sk-red);
+      color: #ff6b81;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      margin: 0 auto 20px;
+    }
+    .success-title {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: #f1f5f9;
+    }
+    .success-desc {
+      font-size: 14px;
+      color: var(--text-gray);
+      line-height: 1.6;
+    }
     
     /* 360px 이하 스마트폰 대응 */
     @media (max-width: 360px) {
@@ -353,7 +395,7 @@
 </head>
 <body>
 
-<div class="wrapper">
+<div class="wrapper" id="app-wrapper">
   <!-- 공식 헤더 -->
   <div class="hero">
     <div class="hero-tag">B 다이렉트샵 공식 제휴 접수처</div>
@@ -368,7 +410,7 @@
   </div>
 
   <!-- FormSubmit 연동: cfciss@gmail.com 자동 발송 -->
-  <form action="https://formsubmit.co/cfciss@gmail.com" method="POST">
+  <form id="apply-form" action="https://formsubmit.co/cfciss@gmail.com" method="POST">
     <input type="hidden" name="_subject" value="[SKB 바로가입] 신규 가입신청 접수">
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_template" value="table">
@@ -460,6 +502,19 @@
       <input type="tel" id="phone" name="연락처" placeholder="예: 010-1234-5678" required>
     </div>
 
+    <!-- 추가된 연락가능한 시간대 선택 메뉴 -->
+    <div class="form-group">
+      <label for="call-time">연락 가능한 시간대 <span>*</span></label>
+      <select id="call-time" name="연락가능한시간대" required>
+        <option value="" disabled selected>시간대를 선택해주세요</option>
+        <option value="언제든 가능">언제든 가능 (상시)</option>
+        <option value="오전 (09:00 ~ 12:00)">오전 (09:00 ~ 12:00)</option>
+        <option value="점심시간 (12:00 ~ 13:00)">점심시간 (12:00 ~ 13:00)</option>
+        <option value="오후 (13:00 ~ 18:00)">오후 (13:00 ~ 18:00)</option>
+        <option value="저녁/퇴근 후 (18:00 이후)">저녁 / 퇴근 후 (18:00 이후)</option>
+      </select>
+    </div>
+
     <div class="form-group">
       <label for="memo">설치 희망 주소 및 일정 (선택)</label>
       <textarea id="memo" name="희망일_상세주소" rows="2" placeholder="예: 서울 강남구 OO아파트, 토요일 오후 설치 희망"></textarea>
@@ -472,7 +527,51 @@
       수집된 정보는 가입 안내 및 설치 일정 조율 목적으로만 안전하게 사용됩니다.
     </div>
   </form>
+
+  <!-- 제출 완료 후 보여질 화면 영역 -->
+  <div id="success-view" class="success-container">
+    <div class="success-icon">✓</div>
+    <div class="success-title">접수가 완료되었습니다</div>
+    <div class="success-desc">
+      신청해주셔서 감사합니다.<br>
+      남겨주신 연락처로 신속하게 연락드리겠습니다.
+    </div>
+  </div>
 </div>
+
+<script>
+  // FormSubmit 비동기 제출 후 깔끔하게 완료 멘트 화면으로 전환해주는 스크립트
+  const form = document.getElementById('apply-form');
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const formData = new FormData(form);
+    
+    // 버튼 비활성화 및 로딩 표시
+    const submitBtn = form.querySelector('.submit-btn');
+    submitBtn.disabled = true;
+    submitBtn.textContent = '접수 처리중입니다...';
+
+    fetch(form.action, {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    }).then(response => {
+      if (response.ok) {
+        // 성공 시 폼을 숨기고 완료 멘트 화면 표시
+        form.style.display = 'none';
+        document.getElementById('success-view').style.display = 'block';
+      } else {
+        alert('접수 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+        submitBtn.disabled = false;
+        submitBtn.textContent = '⚡ 비대면 바로가입 신청 접수하기';
+      }
+    }).catch(error => {
+      alert('네트워크 오류가 발생했습니다. 인터넷 연결을 확인해주세요.');
+      submitBtn.disabled = false;
+      submitBtn.textContent = '⚡ 비대면 바로가입 신청 접수하기';
+    });
+  });
+</script>
 
 </body>
 </html>
