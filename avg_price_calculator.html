@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>주식 평단가 계산기</title>
+<style>
+  body{font-family:'Malgun Gothic',sans-serif;background:#f4f6fa;margin:0;padding:20px;color:#222}
+  .wrap{max-width:820px;margin:auto}
+  h1{font-size:22px}
+  .card{background:#fff;border-radius:10px;padding:18px;margin-bottom:18px;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+  label{font-weight:bold;margin-right:8px}
+  input{padding:7px 9px;border:1px solid #bbb;border-radius:6px;font-size:15px}
+  input.qty{width:130px;text-align:right}
+  table{width:100%;border-collapse:collapse;margin-top:12px;font-size:14px}
+  th,td{padding:8px;border-bottom:1px solid #e3e3e3;text-align:right}
+  th{background:#eef1f7}
+  th:first-child,td:first-child{text-align:center}
+  .down{color:#1565c0}.up{color:#d32f2f}
+  .note{font-size:12px;color:#777;margin-top:8px}
+  .tick{font-size:12px;color:#888}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>📉 주식 평단가 계산기</h1>
+
+  <div class="card">
+    <label for="base">1차 매수가(원)</label>
+    <input id="base" type="number" min="1" value="10000" oninput="calc()">
+    <label for="rate" style="margin-left:14px">하락률(%)</label>
+    <input id="rate" type="number" min="0.1" step="0.1" value="5" style="width:70px" oninput="calc()">
+    <div class="note">각 단계 가격 = 직전 단계 가격 × (1 − 하락률), 호가단위(주가 단위)로 반올림합니다.</div>
+  </div>
+
+  <div class="card">
+    <b>① 단계별 매수가격 / ③ 단계별 평단가</b>
+    <table>
+      <thead><tr>
+        <th>단계</th><th>매수가</th><th>호가단위</th><th>1차 대비</th>
+        <th>매수금액(입력)</th><th>매수수량(자동)</th><th>실매수금액</th><th>누적수량</th><th>누적투자금</th><th>평단가</th><th>평단 대비 현재 매수가</th>
+      </tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <div class="note">매수금액만 입력하면 수량은 자동 계산됩니다(금액 ÷ 매수가, 소수점 이하 버림). 실매수금액 = 수량 × 매수가이며 평단가 계산에 사용됩니다. 금액이 0이면 해당 단계는 매수하지 않은 것으로 봅니다.</div>
+    <div style="margin-top:10px">
+      <label for="amt">단계별 동일 매수금액(원)</label>
+      <input id="amt" type="text" inputmode="numeric" value="1,000,000" oninput="this.value=num(this.value).toLocaleString('ko-KR')" style="width:130px">
+      <button onclick="fillEqual()">모든 단계에 적용</button>
+      
+    </div>
+  </div>
+</div>
+
+<script>
+const STEPS = 6;
+const amts = [1000000,1000000,1000000,1000000,1000000,1000000];
+
+// 한국거래소(KRX) 호가단위
+function tickSize(p){
+  if(p<2000) return 1;
+  if(p<5000) return 5;
+  if(p<20000) return 10;
+  if(p<50000) return 50;
+  if(p<200000) return 100;
+  if(p<500000) return 500;
+  return 1000;
+}
+function roundTick(p){ const t=tickSize(p); return Math.round(p/t)*t; }
+const f = n => Math.round(n).toLocaleString('ko-KR');
+
+function prices(){
+  const base = parseFloat(document.getElementById('base').value);
+  const rate = parseFloat(document.getElementById('rate').value)/100;
+  if(!(base>0)||!(rate>0)) return [];
+  const arr=[roundTick(base)];
+  for(let i=1;i<STEPS;i++) arr.push(roundTick(arr[i-1]*(1-rate)));
+  return arr;
+}
+
+const num = v => parseInt(String(v).replace(/[^0-9]/g,''),10)||0;
+
+// 표 구조는 가격/하락률이 바뀔 때만 다시 만든다 (입력창은 유지)
+function calc(){
+  const ps=prices(), tb=document.getElementById('rows');
+  tb.innerHTML='';
+  ps.forEach((p,i)=>{
+    tb.insertAdjacentHTML('beforeend',`<tr>
+      <td>${i+1}차</td>
+      <td><b>${f(p)}</b></td>
+      <td class="tick">${tickSize(p)}원</td>
+      <td class="down">${((p/ps[0]-1)*100).toFixed(2)}%</td>
+      <td><input class="qty" type="text" inputmode="numeric" value="${amts[i].toLocaleString('ko-KR')}" oninput="setA(${i},this)"></td>
+      <td class="c-q"></td><td class="c-a"></td><td class="c-cq"></td><td class="c-cc"></td>
+      <td class="c-avg"></td><td class="c-diff"></td>
+    </tr>`);
+  });
+  update();
+}
+// 입력창은 건드리지 않고 계산 결과 칸만 갱신
+function update(){
+  const ps=prices(), rows=document.querySelectorAll('#rows tr');
+  let cumQ=0, cumC=0;
+  ps.forEach((p,i)=>{
+    const q=Math.floor(amts[i]/p);
+    cumQ+=q; cumC+=q*p;
+    const avg=cumQ? cumC/cumQ : 0, diffAvg=avg? (p/avg-1)*100 : 0, r=rows[i];
+    r.querySelector('.c-q').textContent=f(q)+'주';
+    r.querySelector('.c-a').textContent=f(q*p);
+    r.querySelector('.c-cq').textContent=f(cumQ);
+    r.querySelector('.c-cc').textContent=f(cumC);
+    r.querySelector('.c-avg').innerHTML='<b>'+(cumQ? f(avg):'-')+'</b>';
+    const d=r.querySelector('.c-diff');
+    d.textContent=cumQ? diffAvg.toFixed(2)+'%':'-';
+    d.className='c-diff '+(diffAvg<0?'down':'up');
+  });
+}
+function setA(i,el){
+  amts[i]=num(el.value);
+  el.value = amts[i]? amts[i].toLocaleString('ko-KR') : '';
+  update();
+}
+function fillEqual(){
+  const amt=num(document.getElementById('amt').value);
+  amts.fill(amt);
+  calc();
+}
+calc();
+</script>
+</body>
+</html>
+
