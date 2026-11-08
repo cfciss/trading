@@ -245,23 +245,39 @@
       color: #fff;
     }
 
-    /* 알뜰폰 결합 안내 박스 */
+    /* SKT 및 알뜰폰 결합 안내 박스 */
     .mvno-box {
-      background: rgba(30, 41, 59, 0.6);
-      border: 1px dashed #334155;
-      border-radius: 11px;
-      padding: 11px 13px;
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 13px;
+      padding: 13px 15px;
       margin-bottom: 22px;
-      font-size: 11.5px;
+      font-size: clamp(12px, 3vw, 12.5px);
       color: #cbd5e1;
-      line-height: 1.45;
+      line-height: 1.55;
+    }
+
+    .mvno-box .box-header {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 7px;
+    }
+
+    .mvno-box .badge {
+      background: rgba(56, 189, 248, 0.18);
+      border: 1px solid rgba(56, 189, 248, 0.45);
+      color: #38bdf8;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 6px;
     }
 
     .mvno-box strong {
-      color: #38bdf8;
-      display: block;
-      margin-bottom: 3px;
-      font-size: 12px;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 700;
     }
 
     /* 결합 유형 선택 그리드 */
@@ -383,6 +399,122 @@
         grid-template-columns: 1fr;
       }
     }
+
+    /* 접수 완료 화면 (신청해주셔서 감사합니다) */
+    .thank-you-view {
+      display: none;
+      padding: 36px 20px 40px;
+      text-align: center;
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .thank-icon-box {
+      width: 76px;
+      height: 76px;
+      margin: 0 auto 20px;
+      background: linear-gradient(135deg, rgba(52, 211, 153, 0.2) 0%, rgba(16, 185, 129, 0.3) 100%);
+      border: 2px solid #10b981;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 38px;
+      color: #34d399;
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.35);
+    }
+
+    .thank-you-view h2 {
+      font-size: clamp(22px, 5.5vw, 25px);
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    .thank-you-view .desc {
+      font-size: clamp(13.5px, 3.4vw, 14.5px);
+      color: #94a3b8;
+      line-height: 1.6;
+      margin-bottom: 24px;
+      word-break: keep-all;
+    }
+
+    .receipt-box {
+      background: #090d16;
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 18px 16px;
+      text-align: left;
+      margin-bottom: 24px;
+    }
+
+    .receipt-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--sk-red-light);
+      margin-bottom: 12px;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+      padding-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .receipt-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 13px;
+      margin-bottom: 9px;
+      line-height: 1.4;
+    }
+
+    .receipt-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .receipt-row .r-label {
+      color: #64748b;
+      flex-shrink: 0;
+      font-weight: 500;
+    }
+
+    .receipt-row .r-val {
+      color: #f1f5f9;
+      font-weight: 600;
+      text-align: right;
+      word-break: break-all;
+    }
+
+    .reset-btn {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.08);
+      color: #cbd5e1;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 14px;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .reset-btn:hover {
+      background: rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+    }
+
+    .btn-loading {
+      opacity: 0.75;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
@@ -391,22 +523,23 @@
   <!-- 공식 헤더 -->
   <div class="hero">
     <div class="hero-tag">SK브로드밴드 공식인증가입점 · 고양남부지점</div>
-    <h1>SKT·알뜰폰 결합 <span>특별할인</span><br>고객맞춤 요금설계 센터</h1>
-    <p>3년 약정 요금할인 · SK폰 1회선 결합 시 3,500원 추가할인!<br>출동비·설치비 무료 혜택으로 실속 있게 바로 가입하세요.</p>
+    <h1>SK브로드밴드 <span>특별할인</span><br>고객맞춤 요금설계 센터</h1>
+    <p>3년 약정 다이렉트 요금할인 · 공식 인증 지점 특별 프로모션!<br>출동비·설치비 무료 혜택으로 실속 있게 바로 가입하세요.</p>
   </div>
 
   <!-- 3대 핵심 소구점 바 -->
   <div class="trust-bar">
     <div class="trust-item"><span>혜택 01</span>설치비·출동비 0원</div>
-    <div class="trust-item"><span>혜택 02</span>SKT·알뜰폰 결합</div>
+    <div class="trust-item"><span>혜택 02</span>당일·주말 빠른설치</div>
     <div class="trust-item"><span>혜택 03</span>월 요금 특가할인</div>
   </div>
 
   <!-- FormSubmit 연동: cfciss@gmail.com 자동 발송 -->
-  <form action="https://formsubmit.co/cfciss@gmail.com" method="POST">
+  <form id="applyForm" action="https://formsubmit.co/cfciss@gmail.com" method="POST">
     <input type="hidden" name="_subject" value="[SKB 바로가입] 특별할인 프로모션 가입신청 접수">
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_next" id="formNextUrl" value="">
 
     <!-- 1단계: 상품 선택 (전단지 3종 실요금 완벽 반영) -->
     <div class="section-title">
@@ -423,7 +556,7 @@
             <span class="plan-badge best">인기 1위</span>
           </div>
           <div class="plan-price">월 26,400원</div>
-          <div class="plan-desc">채널 235개 + 유튜브 지원 / SK폰 결합 + 3,500원 추가할인 적용가</div>
+          <div class="plan-desc">채널 235개 + 유튜브 지원 / 특별 프로모션 적용가</div>
         </div>
         <div class="check-icon">✓</div>
       </label>
@@ -436,7 +569,7 @@
             <span class="plan-badge">실속결합</span>
           </div>
           <div class="plan-price">월 24,200원</div>
-          <div class="plan-desc">채널 235개 + 기가와이파이 포함 / SKT·알뜰폰 1회선 결합 조건</div>
+          <div class="plan-desc">채널 235개 + 기가와이파이 포함 / 가성비 실속 결합</div>
         </div>
         <div class="check-icon">✓</div>
       </label>
@@ -481,43 +614,20 @@
       </label>
     </div>
 
-    <!-- 알뜰폰 결합 안내 -->
+    <!-- SKT 및 알뜰폰 결합할인 안내 -->
     <div class="mvno-box">
-      <strong>💡 SK 알뜰폰 결합 가능 통신사 안내</strong>
-      이야기모바일, 모빙, 토스모바일, 아이즈모바일, KB리브모바일, SK세븐모바일, 티플러스, SMT 이용 고객님도 <b>동일하게 결합 및 핸드폰 요금 추가 할인(3,500원)</b>이 적용됩니다!
+      <div class="box-header">
+        <span class="badge">결합할인 혜택</span>
+        <strong>SKT 및 알뜰폰 결합 시 추가 요금할인 안내</strong>
+      </div>
+      • <b>SKT 휴대폰 결합:</b> 휴대폰 기본료 매월 최대 3,500원 추가 감면<br>
+      • <b>알뜰폰 결합:</b> 토스모바일, SK세븐모바일, KB리브모바일, 이야기모바일 등 SKT망 알뜰폰 이용 고객도 인터넷 결합 할인 및 모바일 추가 할인이 동일하게 적용됩니다.<br>
+      <span style="display: block; margin-top: 5px; color: #94a3b8; font-size: 11px;">※ 신청서 접수 후 전문 상담원이 고객님의 휴대폰 회선에 맞추어 최적의 결합 할인을 자동으로 적용해 드립니다.</span>
     </div>
 
-    <!-- 2단계: 휴대폰 결합 및 희망 혜택 선택 -->
+    <!-- 2단계: 신청자 정보 입력 -->
     <div class="section-title">
-      <span>2. 휴대폰 결합 유형 선택</span>
-      <span class="step">택 1</span>
-    </div>
-    <div class="benefit-grid">
-      <label class="benefit-card">
-        <input type="radio" name="결합유형" value="SKT 휴대폰 결합 (월 3,500원 추가할인 + 설치비 무료)" checked>
-        <span class="name">SKT 휴대폰 결합</span>
-        <span class="sub">핸드폰 3,500원 추가할인</span>
-      </label>
-      <label class="benefit-card">
-        <input type="radio" name="결합유형" value="SK 알뜰폰 결합 (토스/리브/세븐모바일 등 추가할인)">
-        <span class="name">SK 알뜰폰 결합</span>
-        <span class="sub">알뜰폰 결합 + 요금 추가할인</span>
-      </label>
-      <label class="benefit-card">
-        <input type="radio" name="결합유형" value="갤럭시탭 A11+ (Air4) 프로모션 추가 또는 단독 신청">
-        <span class="name">갤럭시탭 A11+ 신청</span>
-        <span class="sub">방송비 월 7,700원에 탭 무료</span>
-      </label>
-      <label class="benefit-card">
-        <input type="radio" name="결합유형" value="결합 없음 / 맞춤 요금 설계 상담 희망">
-        <span class="name">맞춤 요금 설계</span>
-        <span class="sub">전문 상담원 최저가 안내</span>
-      </label>
-    </div>
-
-    <!-- 3단계: 신청자 정보 입력 -->
-    <div class="section-title">
-      <span>3. 신청자 정보 입력</span>
+      <span>2. 신청자 정보 입력</span>
       <span class="step">필수</span>
     </div>
 
@@ -532,18 +642,154 @@
     </div>
 
     <div class="form-group">
-      <label for="memo">사용 중인 통신사(알뜰폰) 및 설치 희망 일정 (선택)</label>
-      <textarea id="memo" name="희망일_상세메모" rows="2" placeholder="예: 토스모바일 사용중 / 남양주시 OO아파트, 토요일 오전 설치 희망"></textarea>
+      <label for="memo">설치 희망 일정 및 요청 사항 (선택)</label>
+      <textarea id="memo" name="희망일_상세메모" rows="2" placeholder="예: 남양주시 OO아파트, 토요일 오전 설치 희망"></textarea>
     </div>
 
-    <button type="submit" class="submit-btn">⚡ 설치비 무료! 특별할인 바로가입 접수</button>
+    <button type="submit" class="submit-btn" id="submitBtn">⚡ 설치비 무료! 특별할인 바로가입 접수</button>
 
     <div class="footer-desc">
       접수 즉시 공식인증가입점 전담 상담원이 확인 후 안내 연락을 드립니다.<br>
       수집된 정보는 맞춤 요금 설계 및 개통 일정 조율 목적으로만 안전하게 사용됩니다.
     </div>
   </form>
+
+  <!-- 접수 완료 화면 (신청해주셔서 감사합니다) -->
+  <div id="thankYouView" class="thank-you-view">
+    <div class="thank-icon-box">✓</div>
+    <h2>신청해주셔서 감사합니다.</h2>
+    <p class="desc">
+      SK브로드밴드 공식인증가입점 전담 상담원이 접수 내역을 확인한 후,<br>
+      남겨주신 연락처로 신속하고 친절하게 안내 연락을 드리겠습니다.
+    </p>
+
+    <div class="receipt-box">
+      <div class="receipt-title">
+        <span>📋 가입신청 접수 내역</span>
+        <span style="font-size: 11.5px; color: #34d399; font-weight: 700;">접수 완료</span>
+      </div>
+      <div class="receipt-row">
+        <span class="r-label">신청자명</span>
+        <span class="r-val" id="rcptName">-</span>
+      </div>
+      <div class="receipt-row">
+        <span class="r-label">연락처</span>
+        <span class="r-val" id="rcptPhone">-</span>
+      </div>
+      <div class="receipt-row">
+        <span class="r-label">선택 상품</span>
+        <span class="r-val" id="rcptPlan" style="color: var(--accent-yellow);">-</span>
+      </div>
+      <div class="receipt-row" id="rcptMemoRow" style="display: none;">
+        <span class="r-label">요청 사항</span>
+        <span class="r-val" id="rcptMemo">-</span>
+      </div>
+    </div>
+
+    <button type="button" class="reset-btn" onclick="resetFormView()">확인 (처음으로 돌아가기)</button>
+  </div>
 </div>
 
-</body>
-</html>
+<script>
+  const applyForm = document.getElementById('applyForm');
+  const thankYouView = document.getElementById('thankYouView');
+  const submitBtn = document.getElementById('submitBtn');
+  const trustBar = document.querySelector('.trust-bar');
+  const formNextUrl = document.getElementById('formNextUrl');
+
+  // fallback redirect URL 설정
+  if (formNextUrl && typeof window !== 'undefined') {
+    const baseUrl = window.location.href.split('?')[0].split('#')[0];
+    formNextUrl.value = baseUrl + '?submitted=1';
+  }
+
+  // URL 파라미터(?submitted=1) 체크 - 일반 브라우저 리다이렉트 완료 대응
+  if (new URLSearchParams(window.location.search).get('submitted') === '1') {
+    showCompletedView();
+  }
+
+  function showCompletedView(data = {}) {
+    if (applyForm) applyForm.style.display = 'none';
+    if (trustBar) trustBar.style.display = 'none';
+    if (thankYouView) thankYouView.style.display = 'block';
+
+    if (data.name) document.getElementById('rcptName').textContent = data.name;
+    if (data.phone) document.getElementById('rcptPhone').textContent = data.phone;
+    if (data.plan) document.getElementById('rcptPlan').textContent = data.plan;
+    if (data.memo) {
+      document.getElementById('rcptMemo').textContent = data.memo;
+      document.getElementById('rcptMemoRow').style.display = 'flex';
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function resetFormView() {
+    if (window.location.search) {
+      window.location.href = window.location.pathname;
+    } else {
+      if (applyForm) {
+        applyForm.reset();
+        applyForm.style.display = 'block';
+      }
+      if (trustBar) trustBar.style.display = 'grid';
+      if (thankYouView) thankYouView.style.display = 'none';
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('btn-loading');
+        submitBtn.innerHTML = '⚡ 설치비 무료! 특별할인 바로가입 접수';
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  if (applyForm) {
+    applyForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      if (!name || !phone) {
+        alert('신청자 성함과 연락처를 입력해 주세요.');
+        return;
+      }
+
+      const planEl = document.querySelector('input[name="가입상품"]:checked');
+      const memoEl = document.getElementById('memo');
+
+      const submitData = {
+        name: name,
+        phone: phone,
+        plan: planEl ? planEl.value : '',
+        memo: memoEl ? memoEl.value.trim() : ''
+      };
+
+      // 버튼 전송 중 표시
+      submitBtn.disabled = true;
+      submitBtn.classList.add('btn-loading');
+      submitBtn.innerHTML = '⚡ 신청 내용을 안전하게 전송 중입니다...';
+
+      const formData = new FormData(applyForm);
+
+      try {
+        const response = await fetch("https://formsubmit.co/ajax/cfciss@gmail.com", {
+          method: "POST",
+          headers: {
+            'Accept': 'application/json'
+          },
+          body: formData
+        });
+
+        if (response.ok) {
+          showCompletedView(submitData);
+        } else {
+          // fetch 응답이 정상이 아니더라도 폼 자체 전송으로 fallback
+          applyForm.submit();
+        }
+      } catch (err) {
+        console.error("AJAX 전송 중 오류 발생, 기본 폼 전송 진행:", err);
+        applyForm.submit();
+      }
+    });
+  }
+</script>
